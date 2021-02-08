@@ -1,4 +1,9 @@
-# NewMicro
+# [New Microsite](https://pilot-cms-mathurada.web.app/)
+
+## Preview
+
+[![Preview](https://github.com//mathurada/CMS-Microsite/blob/master/cms1.png?raw=true)](https://portfolio-mathurada-aor.web.app/)
+[![Preview](https://github.com//mathurada/CMS-Microsite/blob/master/cms2.png?raw=true)](https://portfolio-mathurada-aor.web.app/)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.4.
 
