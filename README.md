@@ -14,7 +14,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 - First Page: Login
 - All of page: Check authorize login
-- For demostartion: Skip authorize login by `http://localhost:4200/#/home`. (close script for the cheking)
+- For demostartion: Skip authorize login by `http://localhost:4200/#/home`. (close script for the checking)
 
 ## Code scaffolding
 
