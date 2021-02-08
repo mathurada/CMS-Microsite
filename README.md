@@ -3,6 +3,9 @@
 ## Preview
 
 [![Preview](https://github.com/mathurada/CMS-Microsite/blob/master/cms1.PNG?raw=true)](https://github.com//mathurada/CMS-Microsite/blob/master/cms1.png?raw=true)
+[![Preview](https://github.com/mathurada/CMS-Microsite/blob/master/cms2.PNG?raw=true)](https://github.com//mathurada/CMS-Microsite/blob/master/cms1.png?raw=true)
+[![Preview](https://github.com/mathurada/CMS-Microsite/blob/master/cms3.PNG?raw=true)](https://github.com//mathurada/CMS-Microsite/blob/master/cms1.png?raw=true)
+[![Preview](https://github.com/mathurada/CMS-Microsite/blob/master/cms4.PNG?raw=true)](https://github.com//mathurada/CMS-Microsite/blob/master/cms1.png?raw=true)
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.4.
 
 ## Development server
