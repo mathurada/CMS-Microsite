@@ -1,0 +1,121 @@
+<div id="wrapper">
+  <app-templatemenu></app-templatemenu>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div class="content">
+      <app-templateheader></app-templateheader>
+      <div class="container-fluid">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Edit Occupation</h6>
+          </div>
+          <div class="card-body">
+            <div class="mb-4">
+              <div id="alert">
+                <div class="alert alert-danger" role="alert" [hidden]="!savefail">Save fail</div>
+                <div class="alert alert-success" role="alert" [hidden]="!savesuccess">Save success</div>
+              </div>
+              <div id="validation-add">
+                <p class="text-danger" [hidden]="!requirethname">*Enter thname</p>
+                <p class="text-danger" [hidden]="!requireorderno">*Enter orderno</p>
+              </div>
+            </div>
+            <form class="form" role="form" autocomplete="off">
+              <div class="form-group row">
+                <div class="col-sm">
+                  <input type="text" class="form-control form-control-sm" placeholder="Enter thainame"
+                    aria-controls="dataTable" [(value)]="thname" (keyup)="onkeyaddfield1($event)">
+                </div>
+                <div class="col-sm">
+                  <input type="text" class="form-control form-control-sm" placeholder="Enter orderno"
+                    aria-controls="dataTable" [(value)]="orderno" (keyup)="onkeyaddfield2($event)">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm">
+                  <a class="btn btn-success btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-plus"></i>
+                    </span>
+                    <button id="btnsave" class="btn btn-success btn-sm" (click)="add()">Add</button>
+                  </a>
+                  <span>&nbsp;</span>
+                  <a class="btn btn-danger btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-remove-format"></i>
+                    </span>
+                    <button type="reset" value="" class="btn btn-danger btn-sm">Clear</button>
+                  </a>
+                </div>
+              </div>
+            </form>
+            <div class="table-responsive">
+              <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>occupationId</th>
+                    <th>thaiName</th>
+                    <th>Order No</th>
+                    <th>Tools</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let cmsoccupation of cmsoccupation | async">
+                    <td>{{cmsoccupation.occupationId}}</td>
+                    <td>{{cmsoccupation.thaiName}}</td>
+                    <td>{{cmsoccupation.occupationMSC_ID}}</td>
+                    <td>
+                      <!-- Button trigger modal -->
+                      <button type="button" class="fas fa-pen-square" data-toggle="modal" data-target="#exampleModal"
+                        (click)="onkeyupdate(cmsoccupation.occupationId, cmsoccupation.thaiName, cmsoccupation.occupationMSC_ID)">
+                      </button>
+                      <!-- Modal -->
+                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Edit Occupation</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <form>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">Occid:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [(value)]="occid" disabled>
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">thainame:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [(value)]="updthname" (keyup)=onkeyupdatefield1($event)>
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">orderno:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [(value)]="updorderno" (keyup)=onkeyupdatefield2($event)>
+                                </div>
+                              </form>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-success btn-sm" (click)="update()"
+                                data-dismiss="modal" aria-label="Close">Update</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" class="fas fa-minus-square"
+                        (click)="delete(cmsoccupation.occupationId)"></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-templatefooter></app-templatefooter>
+    </div>
+  </div>
+</div>

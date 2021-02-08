@@ -1,0 +1,98 @@
+<div id="wrapper">
+  <app-templatemenu></app-templatemenu>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div class="content">
+      <app-templateheader></app-templateheader>
+      <!-- <form novalidate (ngSubmit)="onSubmit($event)"> -->
+        <div id="content-Header" class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12 mb-6">
+              <div class="card shadow mb-6">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Generate Page</h6>
+                </div>
+                <div class="card-body">
+                  <div class="mb-4">
+                    <div id="alert">
+                        <div class="alert alert-danger" role="alert" [hidden]="!savefail">Save fail.</div>
+                        <div class="alert alert-success" role="alert" [hidden]="!savesuccess">Save successful.</div>
+                    </div>
+                    <div id="validation">
+                        <p class="text-danger" [hidden]="!requireproject">*Please select project.</p>
+                      <p class="text-danger" [hidden]="!requirepage">*Please select page.</p>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                      <div class="row">
+                        &nbsp;&nbsp;&nbsp;<h4 class="small font-weight-bold">Project:</h4>
+                        <h4 class="small font-weight-bold text-primary">&nbsp;*</h4>
+                      </div>
+                    <div class="dropdown" style="text-align-last:center; text-align: center;">
+                      <select class="btn btn-danger btn-user btn-block dropdown-toggle btn-sm" [(value)]="projectselect"
+                        (change)="selectproject($event.target.value)">
+                        <option selected [value]="null">Select Project</option>
+                        <option *ngFor="let lookupcmsproject of lookupcmsproject | async"
+                          [value]="lookupcmsproject.code">
+                          {{lookupcmsproject.code}}&#58;&#32;{{lookupcmsproject.description}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                      <div class="row">
+                        &nbsp;&nbsp;&nbsp;<h4 class="small font-weight-bold">Page:</h4>
+                        <h4 class="small font-weight-bold text-primary">&nbsp;*</h4>
+                      </div>
+                    <div class="dropdown" style="text-align-last:center; text-align: center;">
+                      <select class="btn btn-danger btn-user btn-block dropdown-toggle btn-sm" [(value)]="pageselect"
+                        (change)="selectpage($event.target.value)">
+                        <option selected [value]="null">Select Page</option>
+                        <option *ngFor="let lookupcmspagemaster of lookupcmspagemaster | async"
+                          [value]="lookupcmspagemaster.code">
+                          {{lookupcmspagemaster.code}}&#58;&#32;{{lookupcmspagemaster.description}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="text-left">
+                      <a class="btn btn-primary btn-icon-split btn-sm">
+                          <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                          </span>
+                          <button type="submit" id="btnsave" class="btn btn-primary btn-sm"
+                          (click)="onSubmit($event)" >Generate Page File</button>
+                        </a>&nbsp;
+                  </div>
+                  <div class="text-right">
+                    <a class="btn btn-success btn-icon-split btn-sm">
+                      <span class="icon text-white-50">
+                        <i class="fas fa-key"></i>
+                      </span>
+                      <button type="submit" id="btnupload" class="btn btn-success btn-sm"
+                        (click)="onUploadPageFile($event)">Upload Page File</button>
+                    </a>&nbsp;&nbsp;
+                    <a class="btn btn-danger btn-icon-split btn-sm">
+                      <span class="icon text-white-50">
+                        <i class="fas fa-flag"></i>
+                      </span>
+                      <button type="submit" id="btnactivate" class="btn btn-danger btn-sm"
+                        (click)="onUploadPictureFile($event)">Upload Picture File</button>
+                    </a>&nbsp;&nbsp;
+                    <a class="btn btn-primary btn-icon-split btn-sm">
+                        <span class="icon text-white-50">
+                          <i class="fas fa-flag"></i>
+                        </span>
+                        <button type="submit" id="btnactivate" class="btn btn-primary btn-sm"
+                          (click)="onUploadSystemFile($event)">Upload System File</button>
+                      </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- </form> -->
+    </div>
+    <app-templatefooter></app-templatefooter>
+  </div>
+</div>

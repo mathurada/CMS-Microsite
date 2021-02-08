@@ -1,0 +1,15 @@
+
+@charset "utf-8";
+
+@font-face {
+    font-family: 'psl_kandamodern_extra_pro';
+    src: url('psl_kandamodern_extra_pro_regular.eot');
+    src: url('psl_kandamodern_extra_pro_regular.eot?#iefix') format('embedded-opentype'),
+         url('psl_kandamodern_extra_pro_regular.woff2') format('woff2'),
+         url('psl_kandamodern_extra_pro_regular.woff') format('woff'),
+         url('psl_kandamodern_extra_pro_regular.ttf') format('truetype'),
+         url('psl_kandamodern_extra_pro_regular.svg#psl_kandamodern_proregular') format('svg');
+    font-weight: bold;
+    font-style: normal;
+
+}

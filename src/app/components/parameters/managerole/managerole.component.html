@@ -1,0 +1,165 @@
+<div id="wrapper">
+  <app-templatemenu></app-templatemenu>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div class="content">
+      <app-templateheader></app-templateheader>
+      <div id="content-Header" class="container-fluid">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Manage Role</h6>
+          </div>
+          <div class="card-body">
+            <div class="mb-4">
+              <div id="alert">
+                <div class="alert alert-danger" role="alert" [hidden]="!savefail">Save fail</div>
+                <div class="alert alert-success" role="alert" [hidden]="!savesuccess">Save success</div>
+              </div>
+              <div id="validation">
+                <p class="text-danger" [hidden]="!requireproject">*Enter project</p>
+                <p class="text-danger" [hidden]="!requirerolecode">*Enter rolecode</p>
+                <p class="text-danger" [hidden]="!requirerolelevel">*Enter rolelevel</p>
+                <p class="text-danger" [hidden]="!requirethname">*Enter thname</p>
+                <p class="text-danger" [hidden]="!requireenname">*Enter enname</p>
+              </div>
+            </div>
+            <div class="mb-4">
+              <h4 class="small font-weight-bold">Project:</h4>
+              <div class="dropdown" style="text-align-last:center; text-align: center;">
+                <select class="btn btn-danger btn-user btn-block dropdown-toggle btn-sm" [(value)]="projectselect"
+                  (change)="onkeyaddfield1($event.target.value)">
+                  <option selected [value]="null">Select Project</option>
+                  <option *ngFor="let lookupcmsproject of lookupcmsproject | async" [value]="lookupcmsproject.code">
+                    {{lookupcmsproject.code}}&#58;&#32;{{lookupcmsproject.description}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <form class="form" role="form" autocomplete="off">
+              <div class="form-group row">
+                <div class="col-sm">
+                  <input type="search" class="form-control form-control-sm" placeholder="Enter rolecode"
+                    aria-controls="dataTable" [(value)]="rolecode" (keyup)="onkeyaddfield2($event)">
+                </div>
+                <div class="col-sm">
+                  <input type="search" class="form-control form-control-sm" placeholder="Enter rolelevel"
+                    aria-controls="dataTable" [(value)]="rolelevel" (keyup)="onkeyaddfield3($event)">
+                </div>
+                <div class="col-sm">
+                  <input type="search" class="form-control form-control-sm" placeholder="Enter thname"
+                    aria-controls="dataTable" [(value)]="thname" (keyup)="onkeyaddfield4($event)">
+                </div>
+                <div class="col-sm">
+                  <input type="search" class="form-control form-control-sm" placeholder="Enter enname"
+                    aria-controls="dataTable" [(value)]="enname" (keyup)="onkeyaddfield5($event)">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm">
+                  <a class="btn btn-success btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-add"></i>
+                    </span>
+                    <button type="submit" id="btnsave" class="btn btn-success btn-sm" (click)="add()">Add</button>
+                  </a>
+                  <span>&nbsp;</span>
+                  <a class="btn btn-danger btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-remove-format"></i>
+                    </span>
+                    <button type="reset" value="" class="btn btn-danger btn-sm">Clear</button>
+                  </a>
+                </div>
+              </div>
+            </form>
+            <div class="table-responsive">
+              <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0"
+                [hidden]="showtable">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Project</th>
+                    <th>Role Code</th>
+                    <th>Role Leve</th>
+                    <th>Role Name TH</th>
+                    <th>Role Name EN</th>
+                    <th>Tools</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let cmsmanagerole of cmsmanagerole | async">
+                  <tr>
+                    <td>{{cmsmanagerole.project}}</td>
+                    <td>{{cmsmanagerole.roleCode}}</td>
+                    <td>{{cmsmanagerole.roleLevel}}</td>
+                    <td>{{cmsmanagerole.roleNameTH}}</td>
+                    <td>{{cmsmanagerole.roleNameEN}}</td>
+                    <td>
+                      <!-- Button trigger modal -->
+                      <button type="button" class="fas fa-pen-square" data-toggle="modal" data-target="#exampleModal"
+                        (click)="onkeyupdate(
+                            cmsmanagerole.project,
+                            cmsmanagerole.roleCode, 
+                            cmsmanagerole.roleLevel,
+                            cmsmanagerole.roleNameTH,
+                            cmsmanagerole.roleNameEN
+                          )">
+                      </button>
+                      <!-- Modal -->
+                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Edit Manage Role</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <form>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">project:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updprojectselect" disabled>
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">rolecode:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updrolecode" disabled>
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">rolelevel:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updrolelevel" (keyup)="onkeyupdatefield1($event)">
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">thname:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updthname" (keyup)="onkeyupdatefield2($event)">
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">enname:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updenname" (keyup)="onkeyupdatefield3($event)">
+                                </div>
+                              </form>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-success btn-sm" (click)="update()"
+                                data-dismiss="modal" aria-label="Close">Update</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" class="fas fa-minus-square"
+                        (click)="delete(cmsmanagerole.project,cmsmanagerole.roleCode)"></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-templatefooter></app-templatefooter>
+  </div>
+</div>

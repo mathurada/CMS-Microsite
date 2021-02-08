@@ -1,0 +1,159 @@
+<div id="wrapper">
+  <app-templatemenu></app-templatemenu>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <app-templateheader></app-templateheader>
+      <div class="container-fluid">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">Dashboard (Last 30 days)</h1>
+          <h6 class="m-0 font-weight-bold text-primary">Change Request</h6>
+        </div>
+        <div class="row">
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Change (Last 365 days)</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{yearlynum}}</div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Request (total)</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{requestnum}}</div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Approved</div><span
+                      class="float-right">{{approveper}}%</span>
+                    <div class="row no-gutters align-items-center">
+                      <div class="col-auto">
+                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{approvenum}}</div>
+                      </div>
+                      <div class="col">
+                        <div class="progress progress-sm mr-2">
+                          <div class="progress-bar bg-success" role="progressbar" [style.width.%]="approveper"
+                            aria-valuenow="approveper" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div><span
+                      class="float-right">{{pendingper}}%</span>
+                    <div class="row no-gutters align-items-center">
+                      <div class="col-auto">
+                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{pendingnum}}</div>
+                      </div>
+                      <div class="col">
+                        <div class="progress progress-sm mr-2">
+                          <div class="progress-bar bg-warning" role="progressbar" [style.width.%]="pendingper"
+                            aria-valuenow="pendingper" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-comments fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 mb-4">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Summary Edit Detail(Content/Picture)</h6>
+              </div>
+              <div class="card-body">
+                <h4 class="small font-weight-bold">Edit Content ({{text1}}) <span
+                    class="float-right">{{text1per}}%</span></h4>
+                <div class="progress mb-4">
+                  <div class="progress-bar bg-info" role="progressbar" [style.width.%]="text1per"
+                    aria-valuenow="text1per" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">Upload Pictures ({{text2}}) <span
+                    class="float-right">{{text2per}}%</span></h4>
+                <div class="progress mb-4">
+                  <div class="progress-bar bg-success" role="progressbar" [style.width.%]="text2per"
+                    aria-valuenow="text2per" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">Edit Meta Tag ({{text3}}) <span
+                    class="float-right">{{text3per}}%</span></h4>
+                <div class="progress mb-4">
+                  <div class="progress-bar bg-info" role="progressbar" [style.width.%]="text3per"
+                    aria-valuenow="text3per" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-4">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Template</h6>
+              </div>
+              <div class="card-body">
+                <h4 class="small font-weight-bold">Edit Header ({{text4}}) <span
+                    class="float-right">{{text4per}}%</span></h4>
+                <div class="progress mb-4">
+                  <div class="progress-bar bg-danger" role="progressbar" [style.width.%]="text4per"
+                    aria-valuenow="text4per" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">Edit Menu ({{text5}}) <span class="float-right">{{text5per}}%</span>
+                </h4>
+                <div class="progress mb-4">
+                  <div class="progress-bar bg-warning" role="progressbar" [style.width.%]="text5per"
+                    aria-valuenow="text5per" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">Edit Footer ({{text6}}) <span
+                    class="float-right">{{text6per}}%</span></h4>
+                <div class="progress mb-4">
+                  <div class="progress-bar bg-danger" role="progressbar" [style.width.%]="text6per"
+                    aria-valuenow="text6per" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    <app-templatefooter></app-templatefooter>
+  </div>
+</div>

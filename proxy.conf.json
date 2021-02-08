@@ -1,0 +1,7 @@
+{  
+    "/CMSManagement/*": {  
+       "target": "https://10.11.146.53:8666",  
+       "secure": false,  
+       "logLevel": "debug"  
+    }  
+ }  

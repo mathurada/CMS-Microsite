@@ -1,0 +1,148 @@
+.mb10{
+    margin-bottom: 10px
+}
+.mb15{
+    margin-bottom: 15px
+}
+.mb30{
+    margin-bottom: 30px
+}
+.mt10{
+    margin-top: 10px
+}
+.mt15{
+    margin-top: 15px
+}
+.mt20{
+    margin-top: 20px
+}
+.mt30{
+    margin-top:30px
+}
+.mt80{
+    margin-top:80px
+}
+.mr5{
+    margin-right: 5px;
+}
+.mr10{
+    margin-right: 10px;
+}
+
+.divBtnCalculte{
+    text-align: right;
+}
+@media screen and (max-width: 575px) {
+    .divBtnCalculte {
+        text-align: center;
+
+    }
+}
+
+
+/************************** Modal *****************************/
+@media screen and (min-height: 481px) {
+    .modal {
+        padding-top: 100px;
+        height: 100%; /* Full height */
+        overflow: auto; 
+    }
+}
+@media screen and (max-height: 480px) {
+    .modal {
+        padding-top: 10px;
+    }
+   #mbody {
+        height: 180px; /* Full height */
+        overflow: scroll; 
+        }
+}
+ @media screen and (max-height: 320px) and (max-width: 480px) {
+    .glyphicon.glyphicon-refresh{
+        top : 90px;
+        right : 60px;
+    }
+}
+@media screen and (max-width: 320px) {
+     .glyphicon.glyphicon-refresh{
+        top : 110px;
+        right : 5px;
+    }
+}
+ @media screen and (max-width: 414px) and (min-width: 321px) {
+     .glyphicon.glyphicon-refresh{
+        top : 110px;
+        right : 20px;
+    }
+}
+ /*Refresh for Ipad - Desktop*/
+  @media screen and (min-width: 481px) {
+     .glyphicon.glyphicon-refresh{
+        top : 90px;
+        right : 100px;
+    }
+}
+
+/* The Modal (background) */
+.modal {
+display: none; /* Hidden by default */
+position: fixed; /* Stay in place */
+z-index: 1; /* Sit on top */
+left: 0;
+top: 0;
+width: 100%; /* Full width */
+height: 100%; /* Full height */
+overflow: auto; /* Enable scroll if needed */
+background-color: rgb(0,0,0); /* Fallback color */
+background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+-webkit-touch-callout: none; /* iOS Safari */
+-webkit-user-select: none; /* Chrome/Safari/Opera */
+-khtml-user-select: none; /* Konqueror */
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none; /* Internet Explorer/Edge */
+user-select: none; /* Non-prefixed version, currently
+                              not supported by any browser */
+}
+
+/* Modal Content */
+.modal-content {
+position: relative;
+background-color: #fefefe;
+margin: auto;
+padding: 0;
+border: 1px solid #888;
+width: 80%;
+max-width: 450px;
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+-webkit-animation-name: animatetop;
+-webkit-animation-duration: 0.4s;
+animation-name: animatetop;
+animation-duration: 0.4s;
+top:20%;
+}
+
+.modal-header-red {
+    padding: 2px 16px;
+    background-color: #790007;
+    color: white;
+}
+
+.parent {
+    min-height: 100%;
+    display: table;
+  }
+  .child {
+      font-size: 20px;
+    display: table-cell;
+    vertical-align: middle; 
+  }
+  .modal-close {
+    float: right;
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 1;
+    color:white;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .8;
+  }

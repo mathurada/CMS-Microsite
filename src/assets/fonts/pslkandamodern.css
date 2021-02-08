@@ -1,0 +1,65 @@
+
+@font-face {
+    font-family: 'psl_kandamodern_proregular';
+    src: url('psl_kanda_modern_regular-webfont.eot');
+    src: url('psl_kanda_modern_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('psl_kanda_modern_regular-webfont.woff2') format('woff2'),
+         url('psl_kanda_modern_regular-webfont.woff') format('woff'),
+         url('psl_kanda_modern_regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'psl_kandamodern_probold';
+    src: url('psl_kanda_modern_bold-webfont.eot');
+    src: url('psl_kanda_modern_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('psl_kanda_modern_bold-webfont.woff2') format('woff2'),
+         url('psl_kanda_modern_bold-webfont.woff') format('woff'),
+         url('psl_kanda_modern_bold-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'psl_kandamodern_proBdIt';
+    src: url('psl_kanda_modern_bold_italic-webfont.eot');
+    src: url('psl_kanda_modern_bold_italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('psl_kanda_modern_bold_italic-webfont.woff2') format('woff2'),
+         url('psl_kanda_modern_bold_italic-webfont.woff') format('woff'),
+         url('psl_kanda_modern_bold_italic-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'psl_kandamodern_proRg';
+    src: url('psl_kanda_modern_extra-webfont.eot');
+    src: url('psl_kanda_modern_extra-webfont.eot?#iefix') format('embedded-opentype'),
+         url('psl_kanda_modern_extra-webfont.woff2') format('woff2'),
+         url('psl_kanda_modern_extra-webfont.woff') format('woff'),
+         url('psl_kanda_modern_extra-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'psl_kandamodern_proIt';
+    src: url('psl_kanda_modern_extra_italic-webfont.eot');
+    src: url('psl_kanda_modern_extra_italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('psl_kanda_modern_extra_italic-webfont.woff2') format('woff2'),
+         url('psl_kanda_modern_extra_italic-webfont.woff') format('woff'),
+         url('psl_kanda_modern_extra_italic-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+

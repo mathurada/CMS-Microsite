@@ -1,0 +1,183 @@
+<div id="wrapper">
+  <app-templatemenu></app-templatemenu>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div class="content">
+      <app-templateheader></app-templateheader>
+      <div class="container-fluid">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Approve</h6>
+          </div>
+          <div class="card-body">
+            <div class="mb-4">
+              <div id="alert">
+                <div class="alert alert-danger" role="alert" [hidden]="!approvefail">Approve fail.</div>
+                <div class="alert alert-success" role="alert" [hidden]="!approvesuccess">Approve successful.</div>
+                <div class="alert alert-danger" role="alert" [hidden]="!rejectfail">Reject fail.</div>
+                <div class="alert alert-success" role="alert" [hidden]="!rejectsuccess">Reject successful.</div>
+              </div>
+              <div id="validation">
+                <div class="alert alert-danger" role="alert" [hidden]="!requirefromdate">Please select from date.</div>
+                <div class="alert alert-danger" role="alert" [hidden]="!requiretodate">Please select to date.</div>
+              </div>
+            </div>
+            <form class="form" role="form" autocomplete="off">
+              <div class="form-group row">
+                <div class="col-sm">
+                  <input type="search" class="form-control form-control-sm" placeholder="Requested by"
+                    aria-controls="dataTable" [(value)]="requestedby" (keyup)="onkeysearchfield1($event)">
+                </div>
+                <div class="col-sm">
+                  <input type="search" class="form-control form-control-sm" placeholder="Approved by"
+                    aria-controls="dataTable" [(value)]="approvedby" (keyup)="onkeysearchfield2($event)">
+                </div>
+                <div class="col-sm">
+                  <input class="form-control form-control-sm" placeholder="From date" bsDatepicker
+                    (bsValueChange)="onkeysearchfield3($event)" [bsConfig]="bsConfigFromdate" [(bsValue)]="fromdate">
+                </div>
+                <div class="col-sm">
+                  <input class="form-control form-control-sm" placeholder="To date" bsDatepicker
+                    (bsValueChange)="onkeysearchfield4($event)" [bsConfig]="bsConfigTodate" [(bsValue)]="todate">
+                </div>
+                <div class="col-sm">
+                  <div class="dropdown" style="text-align-last:center; text-align: center;">
+                    <select class="btn btn-danger btn-user btn-block dropdown-toggle btn-sm" [(value)]="statusselect"
+                      (change)="onkeysearchfield5($event.target.value)">
+                      <option selected [value]="null">Status</option>
+                      <option *ngFor="let lookupcmsstatus of lookupcmsstatus | async" [value]="lookupcmsstatus.code">
+                        {{lookupcmsstatus.code}}&#58;&#32;{{lookupcmsstatus.description}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm">
+                  <a class="btn btn-success btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                    </span>
+                    <button type="submit" id="btnsave" class="btn btn-success btn-sm" (click)="search()">Search</button>
+                  </a>
+                  <span>&nbsp;</span>
+                  <a class="btn btn-danger btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-remove-format"></i>
+                    </span>
+                    <button type="reset" value="" class="btn btn-danger btn-sm">Clear</button>
+                  </a>
+                </div>
+              </div>
+            </form>
+            <div class="table-responsive">
+              <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>CID</th>
+                    <th>CDesc</th>
+                    <!-- <th>PageID</th> -->
+                    <th>Req. By</th>
+                    <th>Req. On&nbsp;&nbsp;&nbsp;</th>
+                    <th>Req. Remark</th>
+                    <th>Apr. By</th>
+                    <th>Apr. On</th>
+                    <th>Apr. Remark</th>
+                    <th>Status</th>
+                    <th>Tools</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let cmsapprove of cmsapprove| async">
+                  <tr>
+                    <td>{{cmsapprove.changeID}}</td>
+                    <td>{{cmsapprove.changeDESC}}</td>
+                    <!-- <td>{{cmsapprove.pageID}}</td> -->
+                    <td>{{cmsapprove.requestBy}}</td>
+                    <td>{{cmsapprove.requestOn | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                    <td>{{cmsapprove.requestRemark}}</td>
+                    <td>{{cmsapprove.approvedBy1}}</td>
+                    <td>{{cmsapprove.approvedOn1 | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                    <td>{{cmsapprove.approveRemark}}</td>
+                    <td [style.color]="cmsapprove.changeStatus=='Approved'? 'green' : cmsapprove.changeStatus=='Rejected'? 'red' : 'blue'">{{cmsapprove.changeStatus}}</td>
+                    <!-- <td>{{cmsapprove.changeStatus}}</td> -->
+                    <td>
+                      <button type="button" class="fas fa-pen-square" data-toggle="modal" data-target="#exampleModal"
+                        (click)="onkeyupdate(
+                            cmsapprove.changeID
+                            ,cmsapprove.changeDESC
+                            ,cmsapprove.requestBy
+                            ,cmsapprove.requestOn
+                            ,cmsapprove.requestRemark
+                            ,cmsapprove.approveRemark
+                            ,cmsapprove.pageID
+                          )">
+                      </button>
+                      <!-- Modal -->
+                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Edit Approve</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <form>
+                                <div class="row">
+                                <div class="form-group col-md-3">
+                                  <label for="recipient-name" class="col-form-label">Change ID:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [(value)]="updchangeid" disabled>
+                                </div>
+                                <div class="form-group col-md-9">
+                                  <label for="recipient-name" class="col-form-label">Change Desc:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [(value)]="updchangedesc" disabled>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="form-group col-md-3">
+                                  <label for="recipient-name" class="col-form-label">Request by:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [(value)]="updrequestBy" disabled>
+                                </div>
+                                <div class="form-group col-md-3">
+                                  <label for="recipient-name" class="col-form-label">Request on:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [(value)]="updrequestOn" disabled>
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label for="recipient-name" class="col-form-label">Request Remark:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [(value)]="updrequestRemark" disabled>
+                                </div>
+                              </div>
+                                <div class="form-group col-md-12">
+                                  <label for="recipient-name" class="col-form-label">Approve Remark:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [(value)]="updapproveRemark">
+                                </div>
+                              </form>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-success btn-sm" (click)="approve()"
+                                data-dismiss="modal" aria-label="Close">Approve</button>
+                              <button type="button" class="btn btn-danger btn-sm" (click)="reject()"
+                                data-dismiss="modal" aria-label="Close">Reject</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-templatefooter></app-templatefooter>
+  </div>
+</div>

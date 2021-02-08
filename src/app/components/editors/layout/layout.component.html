@@ -1,0 +1,123 @@
+<div id="wrapper">
+  <app-templatemenu></app-templatemenu>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div class="content">
+      <app-templateheader></app-templateheader>
+      <form novalidate (ngSubmit)="onSubmit($event)">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-9 mb-6">
+              <div class="card shadow mb-6">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">
+                    Edit Layout Page
+                    <select class="badge badge-secondary float-right" [hidden]="show" [(value)]="changeid"
+                      (change)="selectchangeid($event.target.value)">
+                      <option selected [value]="null">Select ChangeID</option>
+                      <option *ngFor="let lookupchangeid of lookupchangeid | async" [value]="lookupchangeid.changeID">
+                        {{lookupchangeid.changeID}}
+                      </option>
+                    </select>
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <div class="mb-4">
+                    <div id="alert">
+                      <div class="alert alert-danger" role="alert" [hidden]="!savefail">Save fail.</div>
+                      <div class="alert alert-success" role="alert" [hidden]="!savesuccess">Save successful.</div>
+                    </div>
+                    <div id="validation">
+                      <p class="text-danger" [hidden]="!requirelayout">*Please select layout.</p>
+                      <p class="text-danger" [hidden]="!requirechangeid">*Please select changeid.</p>
+                      <p class="text-danger" [hidden]="!requiretextstart">*Please input Start Text.</p>
+                      <p class="text-danger" [hidden]="!requiretextend">*Please input End Text.</p>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <div class="row">
+                      &nbsp;&nbsp;&nbsp;<h4 class="small font-weight-bold">Layout ID:</h4>
+                      <h4 class="small font-weight-bold text-primary">&nbsp;*</h4>
+                    </div>
+                    <div class="dropdown" style="text-align-last:center; text-align: center;">
+                      <select class="btn btn-danger btn-user btn-block dropdown-toggle btn-sm" [(value)]="layoutselect"
+                        (change)=selectpageLayout($event.target.value)>
+                        <option selected [value]="null">Select Layout</option>
+                        <option *ngFor="let lookupcmspagelayout of lookupcmspagelayout | async"
+                          [value]="lookupcmspagelayout.code">
+                          {{lookupcmspagelayout.code}}&#58;&#32;{{lookupcmspagelayout.description}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class=" mb-4">
+                    <div class="row">
+                      &nbsp;&nbsp;&nbsp;<h4 class="small font-weight-bold">StartText:</h4>
+                      <h4 class="small font-weight-bold text-primary">&nbsp;*</h4>
+                    </div>
+                    <textarea class="form-control form-control-sm" [(value)]="startText"
+                      id="InputstartText">{{startText}}</textarea>
+                  </div>
+                  <div class=" mb-4">
+                    <h4 class="small font-weight-bold">BodyText1:</h4>
+                    <textarea class="form-control form-control-sm" [(value)]="bodyText1"
+                      id="InputbodyText1">{{bodyText1}}</textarea>
+                  </div>
+                  <div class=" mb-4">
+                    <h4 class="small font-weight-bold">BodyText2:</h4>
+                    <textarea class="form-control form-control-sm" [(value)]="bodyText2"
+                      id="InputbodyText2">{{bodyText2}}</textarea>
+                  </div>
+                  <div class=" mb-4">
+                    <h4 class="small font-weight-bold">BodyText3:</h4>
+                    <textarea class="form-control form-control-sm" [(value)]="bodyText3"
+                      id="InputbodyText3">{{bodyText3}}</textarea>
+                  </div>
+                  <div class=" mb-4">
+                    <h4 class="small font-weight-bold">BodyText4:</h4>
+                    <textarea class="form-control form-control-sm" [(value)]="bodyText4"
+                      id="InputbodyText4">{{bodyText4}}</textarea>
+                  </div>
+                  <div class=" mb-4">
+                    <h4 class="small font-weight-bold">BodyText5:</h4>
+                    <textarea class="form-control form-control-sm" [(value)]="bodyText5"
+                      id="InputbodyText5">{{bodyText5}}</textarea>
+                  </div>
+                  <div class=" mb-4">
+                    <div class="row">
+                      &nbsp;&nbsp;&nbsp;<h4 class="small font-weight-bold">EndText:</h4>
+                      <h4 class="small font-weight-bold text-primary">&nbsp;*</h4>
+                    </div>
+                    <textarea class="form-control form-control-sm" [(value)]="endText"
+                      id="Inputendtext">{{endText}}</textarea>
+                  </div>
+                  <div class=" mb-4 text-right">
+                    <a class="btn btn-success btn-icon-split btn-sm">
+                      <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                      </span>
+                      <button type="submit" id="btnsave" class="btn btn-success btn-sm">Save</button>
+                    </a>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 mb-2">
+              <div class="card shadow mb-2">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-danger">Result</h6>
+                </div>
+                <div class="card-body">
+                  <div class="text-center">
+                    <div [innerHTML]="startText+bodyText1+bodyText2+bodyText3+bodyText4+bodyText5+endText"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <app-templatefooter></app-templatefooter>
+  </div>
+</div>

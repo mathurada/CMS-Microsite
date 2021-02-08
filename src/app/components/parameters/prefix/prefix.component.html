@@ -1,0 +1,161 @@
+<div id="wrapper">
+  <app-templatemenu></app-templatemenu>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div class="content">
+      <app-templateheader></app-templateheader>
+      <div class="container-fluid">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Edit Prefix</h6>
+          </div>
+          <div class="card-body">
+            <div class="mb-4">
+              <div id="alert">
+                <div class="alert alert-danger" role="alert" [hidden]="!savefail">Save fail</div>
+                <div class="alert alert-success" role="alert" [hidden]="!savesuccess">Save success</div>
+              </div>
+              <div id="validation">
+                <p class="text-danger" [hidden]="!requireprefixcode">*Enter prefixcode</p>
+                <p class="text-danger" [hidden]="!requireshname">*Enter shname</p>
+                <p class="text-danger" [hidden]="!requirethname">*Enter thname</p>
+                <p class="text-danger" [hidden]="!requireenname">*Enter enname</p>
+                <p class="text-danger" [hidden]="!requiregender">*Enter gender</p>
+              </div>
+            </div>
+            <form class="form" role="form" autocomplete="off">
+              <div class="form-group row">
+                <div class="col-sm">
+                  <input type="search" class="form-control form-control-sm" placeholder="Enter prefixcode"
+                    aria-controls="dataTable" [(value)]="prefixcode" (keyup)="onkeyaddfield1($event)">
+                </div>
+                <div class="col-sm">
+                  <input type="search" class="form-control form-control-sm" placeholder="Enter shortname"
+                    aria-controls="dataTable" [(value)]="shname" (keyup)="onkeyaddfield2($event)">
+                </div>
+                <div class="col-sm">
+                  <input type="search" class="form-control form-control-sm" placeholder="Enter thainame"
+                    aria-controls="dataTable" [(value)]="thname" (keyup)="onkeyaddfield3($event)">
+                </div>
+                <div class="col-sm">
+                  <input type="search" class="form-control form-control-sm" placeholder="Enter engame"
+                    aria-controls="dataTable" [(value)]="enname" (keyup)="onkeyaddfield4($event)">
+                </div>
+                <div class="col-sm">
+                  <div class="dropdown" style="text-align-last:center; text-align: center;">
+                    <select class="btn btn-danger btn-user btn-block dropdown-toggle btn-sm" [(value)]="gender"
+                      (change)="onkeyaddfield5($event.target.value)">
+                      <option selected [value]="null">Select Gender</option>
+                      <option value="M">Male</option>
+                      <option value="F">Female</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm">
+                  <a class="btn btn-success btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-add"></i>
+                    </span>
+                    <button type="submit" id="btnsave" class="btn btn-success btn-sm" (click)="add()">Add</button>
+                  </a>
+                  <span>&nbsp;</span>
+                  <a class="btn btn-danger btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-remove-format"></i>
+                    </span>
+                    <button type="reset" value="" class="btn btn-danger btn-sm">Clear</button>
+                  </a>
+                </div>
+              </div>
+            </form>
+            <div class="table-responsive">
+              <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>PrefixCode</th>
+                    <th>shortName</th>
+                    <th>thaiName</th>
+                    <th>engName</th>
+                    <th>gender</th>
+                    <th>Tools</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let cmsprefix of cmsprefix | async">
+                    <td>{{cmsprefix.prefixcode}}</td>
+                    <td>{{cmsprefix.shortname}}</td>
+                    <td>{{cmsprefix.thaiName}}</td>
+                    <td>{{cmsprefix.engName}}</td>
+                    <td>{{cmsprefix.gender}}</td>
+                    <td>
+                      <!-- Button trigger modal -->
+                      <button type="button" class="fas fa-pen-square" data-toggle="modal" data-target="#exampleModal"
+                        (click)="onkeyupdate(cmsprefix.prefixcode, cmsprefix.shortname, cmsprefix.thaiName, cmsprefix.engName, cmsprefix.gender)">
+                      </button>
+                      <!-- Modal -->
+                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Edit Prefix</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <form>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">prefixcode:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updprefixcode" disabled>
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">shortname:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updshname" (keyup)="onkeyupdatefield1($event)">
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">thainame:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updthname" (keyup)="onkeyupdatefield2($event)">
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">engname:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updenname" (keyup)="onkeyupdatefield3($event)">
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">gender:</label>
+                                  <div class="dropdown" style="text-align-last:center; text-align: center;">
+                                    <select class="btn btn-danger btn-user btn-block dropdown-toggle btn-sm"
+                                      [(value)]="updgender" (change)="onkeyupdfield4($event.target.value)">
+                                      <option [value]="null">Select Gender</option>
+                                      <option [value]="M" [selected]="showupdmale">Male</option>
+                                      <option [value]="F" [selected]="showupdfemale">Female</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-success btn-sm" (click)="update()"
+                                data-dismiss="modal" aria-label="Close">Update</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" class="fas fa-minus-square" (click)="delete(cmsprefix.prefixcode)"></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-templatefooter></app-templatefooter>
+  </div>
+</div>

@@ -1,0 +1,197 @@
+<div id="wrapper">
+  <app-templatemenu></app-templatemenu>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div class="content">
+      <app-templateheader></app-templateheader>
+      <div id="content-Header" class="container-fluid">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Manage Menu Role</h6>
+          </div>
+          <div class="card-body">
+            <div class=" mb-4">
+              <div id="alert">
+                <div class="alert alert-danger" role="alert" [hidden]="!savefail">Save Fail</div>
+                <div class="alert alert-success" role="alert" [hidden]="!savesuccess">Save Success</div>
+              </div>
+              <div id="validation">
+                <p class="text-danger" [hidden]="!requireproject">*Enter project</p>
+                <p class="text-danger" [hidden]="!requirerole">*Enter Role</p>
+                <p class="text-danger" [hidden]="!requiremenuid">*Enter Menu ID</p>
+                <p class="text-danger" [hidden]="!requiremenutype">*Enter Menu Type</p>
+                <p class="text-danger" [hidden]="!requiremenutext">*Enter Menu Text</p>
+                <p class="text-danger" [hidden]="!requiremenuurl">*Enter Menu Url</p>
+                <p class="text-danger" [hidden]="!requireremark">*Enter Remark</p>
+              </div>
+            </div>
+            <div class="mb-4">
+              <h4 class="small font-weight-bold">Project:</h4>
+              <div class="dropdown" style="text-align-last:center; text-align: center;">
+                <select class="btn btn-danger btn-user btn-block dropdown-toggle btn-sm" [(value)]="projectselect"
+                  (change)="onkeyaddfield1($event.target.value)">
+                  <option selected [value]="null">Select Project</option>
+                  <option *ngFor="let lookupcmsproject of lookupcmsproject | async" [value]="lookupcmsproject.code">
+                    {{lookupcmsproject.code}}&#58;&#32;{{lookupcmsproject.description}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="mb-4">
+              <h4 class="small font-weight-bold">Role:</h4>
+              <div class="dropdown" style="text-align-last:center; text-align: center;">
+                <select class="btn btn-danger btn-user btn-block dropdown-toggle btn-sm" [(value)]="roleselect"
+                  (change)="onkeyaddfield2($event.target.value)">
+                  <option selected [value]="null">Select Role</option>
+                  <option *ngFor="let lookupcmsrole of lookupcmsrole | async" [value]="lookupcmsrole.code">
+                    {{lookupcmsrole.code}}&#58;&#32;{{lookupcmsrole.description}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <form class="form" role="form" autocomplete="off">
+              <div class="form-group row">
+                <div class="col-sm">
+                  <input type="search" class="form-control form-control-sm" placeholder="Enter Menuid"
+                    aria-controls="dataTable" [(value)]="menuid" (keyup)="onkeyaddfield3($event)">
+                </div>
+                <div class="col-sm">
+                  <input class="form-control form-control-sm" placeholder="Enter menutype" aria-controls="dataTable"
+                    [(value)]="menutype" (keyup)="onkeyaddfield4($event)">
+                </div>
+                <div class="col-sm">
+                  <input class="form-control form-control-sm" placeholder="Enter menutext" aria-controls="dataTable"
+                    [(value)]="menutext" (keyup)="onkeyaddfield5($event)">
+                </div>
+                <div class="col-sm">
+                  <input class="form-control form-control-sm" placeholder="Enter menuurl" aria-controls="dataTable"
+                    [(value)]="menuurl" (keyup)="onkeyaddfield6($event)">
+                </div>
+                <div class="col-sm">
+                  <input class="form-control form-control-sm" placeholder="Enter remark" aria-controls="dataTable"
+                    [(value)]="remark" (keyup)="onkeyaddfield7($event)">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm">
+                  <a class="btn btn-success btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-plus"></i>
+                    </span>
+                    <button type="submit" id="btnsave" class="btn btn-success btn-sm" (click)="add()">Add</button>
+                  </a>
+                  <span>&nbsp;</span>
+                  <a class="btn btn-danger btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-remove-format"></i>
+                    </span>
+                    <button type="reset" value="" class="btn btn-danger btn-sm">Clear</button>
+                  </a>
+                </div>
+              </div>
+            </form>
+            <div class="table-responsive">
+              <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0"
+                [hidden]="showtable">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Role</th>
+                    <th>Menu ID</th>
+                    <th>Menu Type</th>
+                    <th>Menu Text</th>
+                    <th>Menu Url</th>
+                    <th>Remark</th>
+                    <th>Tools</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let cmsmanagemenurole of cmsmanagemenurole | async">
+                  <tr>
+                    <td>{{cmsmanagemenurole.roleCode}}</td>
+                    <td>{{cmsmanagemenurole.menuId}}</td>
+                    <td>{{cmsmanagemenurole.menuType}}</td>
+                    <td>{{cmsmanagemenurole.menuText}}</td>
+                    <td>{{cmsmanagemenurole.menuURL}}</td>
+                    <td>{{cmsmanagemenurole.remark}}</td>
+                    <td>
+                      <!-- Button trigger modal -->
+                      <button type="button" class="fas fa-pen-square" data-toggle="modal" data-target="#exampleModal"
+                        (click)="onkeyupdate(
+                            projectselect,
+                            roleselect,
+                            cmsmanagemenurole.menuId, 
+                            cmsmanagemenurole.menuType,
+                            cmsmanagemenurole.menuText,
+                            cmsmanagemenurole.menuURL,
+                            cmsmanagemenurole.remark
+                          )">
+                      </button>
+                      <!-- Modal -->
+                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Edit Manage Menu Role</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <form>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">project:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updprojectselect" disabled>
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">role:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updroleselect" disabled>
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">menuid:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updmenuid" disabled>
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">menutype:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updmenutype" (keyup)="onkeyupdatefield1($event)">
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">menutext:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updmenutext" (keyup)="onkeyupdatefield2($event)">
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">menuurl:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updmenuurl" (keyup)="onkeyupdatefield3($event)">
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">remark:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updremark" (keyup)="onkeyupdatefield4($event)">
+                                </div>
+                              </form>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-success btn-sm" (click)="update()"
+                                data-dismiss="modal" aria-label="Close">Update</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" class="fas fa-minus-square"
+                        (click)="delete(projectselect,roleselect,cmsmanagemenurole.menuId)"></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-templatefooter></app-templatefooter>
+  </div>
+</div>

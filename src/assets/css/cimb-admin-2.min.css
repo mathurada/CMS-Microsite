@@ -1,0 +1,15 @@
+.bg-gradient-cimb {
+  background-color: #942523;
+  background-image: linear-gradient(180deg, #942523 10%, #7a0108 100%);
+  height: 100vh;
+}
+
+.logo {
+  float:center;
+  width:90%;
+  height:60%;
+}
+
+.text-cimb{
+  color: #790007!important;
+}

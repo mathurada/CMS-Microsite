@@ -1,0 +1,98 @@
+<div id="wrapper">
+  <app-templatemenu></app-templatemenu>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div class="content">
+      <app-templateheader></app-templateheader>
+      <form novalidate (ngSubmit)="onSubmit($event)">
+        <div id="content-Header" class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12 mb-8">
+              <div class="card shadow mb-8">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">
+                    Edit System Content
+                    <select class="badge badge-secondary float-right" [hidden]="show" [(value)]="changeid"
+                      (change)="selectchangeid($event.target.value)">
+                      <option selected [value]="null">Select ChangeID</option>
+                      <option *ngFor="let lookupchangeid of lookupchangeid | async" [value]="lookupchangeid.changeID">
+                        {{lookupchangeid.changeID}}
+                      </option>
+                    </select>
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <div class="mb-4">
+                    <div id="alert">
+                      <div class="alert alert-danger" role="alert" [hidden]="!savefail">Save fail.</div>
+                      <div class="alert alert-success" role="alert" [hidden]="!savesuccess">Save successful.</div>
+                    </div>
+                    <div id="validation">
+                      <p class="text-danger" [hidden]="!requirepage">*Please select system.</p>
+                      <p class="text-danger" [hidden]="!requirechangeid">*Please select changeid.</p>
+                      <p class="text-danger" [hidden]="!requiretext">*Please input Content.</p>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <div class="row">
+                      &nbsp;&nbsp;&nbsp;<h4 class="small font-weight-bold">Page:</h4>
+                      <h4 class="small font-weight-bold text-primary">&nbsp;*</h4>
+                    </div>
+                    <div class="dropdown" style="text-align-last:center; text-align: center;">
+                      <select class="btn btn-danger btn-user btn-block dropdown-toggle btn-sm" id=""
+                        [(value)]="pageselect" (change)="selectpage($event.target.value)">
+                        <option selected [value]="null">Select System</option>
+                        <option *ngFor="let lookupcmspagemaster of lookupcmspagemaster | async"
+                          [value]="lookupcmspagemaster.code">
+                          {{lookupcmspagemaster.code}}&#58;&#32;{{lookupcmspagemaster.description}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class=" mb-4">
+                    <div class="textarea" id="collapseExample">
+                      <div class="row">
+                        &nbsp;&nbsp;&nbsp;<h4 class="small font-weight-bold">Content:</h4>
+                        <h4 class="small font-weight-bold text-primary">&nbsp;*</h4>
+                      </div>
+                      <textarea id="myTextArea" class="form-control" rows="20" style="height:auto;"
+                       [(value)]="text1" id="InputText1"></textarea>
+                      <!-- <ejs-richtexteditor #fromRTE [(value)]='text1' required name="name" [(ngModel)]="text1"
+                        [toolbarSettings]='tools'></ejs-richtexteditor> -->
+                    </div>
+                  </div>
+                  <div class=" mb-4 text-right">
+                    <a class="btn btn-success btn-icon-split btn-sm">
+                      <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                      </span>
+                      <button type="submit" id="btnsave" class="btn btn-success btn-sm">Save</button>
+                    </a>&nbsp;
+                    <!-- <a href="#" class="btn btn-primary btn-icon-split btn-sm">
+                      <span class="icon text-white-50">
+                        <i class="fas fa-flag"></i>
+                      </span>
+                      <button type="submit" id="btnsave" class="btn btn-primary btn-sm" ng-click="previewdata()" >Preview</button>
+                    </a> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-lg-3 mb-2">
+              <div class="card shadow mb-2">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-danger">Result</h6>
+                </div>
+                <div class="card-body">
+                  <div class="text-center">
+                    <div [innerHTML]="text1"></div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </form>
+    </div>
+    <app-templatefooter></app-templatefooter>
+  </div>
+</div>

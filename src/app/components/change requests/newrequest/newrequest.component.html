@@ -1,0 +1,62 @@
+<div id="wrapper">
+  <app-templatemenu></app-templatemenu>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div class="content">
+      <app-templateheader></app-templateheader>
+      <form novalidate (ngSubmit)="onSubmit($event)">
+        <div id="content-Header" class="container-fluid">
+          <div class="row">
+            <div class="col-lg-7 mb-4">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">
+                    New Request
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <div class="mb-4">
+                    <div id="alert">
+                      <div class="alert alert-danger" role="alert" [hidden]="!savefail">Save fail.</div>
+                      <div class="alert alert-success" role="alert" [hidden]="!savesuccess">Save successful.</div>
+                    </div>
+                    <div id="validation">
+                      <p class="text-danger" [hidden]="!requirechangerequestdesc">*Please input request desc</p>
+                      <p class="text-danger" [hidden]="!requireremark">*Please input remark.</p>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <div class="row">
+                      &nbsp;&nbsp;&nbsp;<h4 class="small font-weight-bold">Change Request Description:</h4>
+                      <h4 class="small font-weight-bold text-primary">&nbsp;*</h4>
+                    </div>
+                    <textarea id="myTextArea" class="form-control" rows="1" style="height:auto;"
+                      [(value)]="changerequestdesc" id="InputChangeRequestDesc"></textarea>
+                  </div>
+                  <div class=" mb-4">
+                    <div class="row">
+                      &nbsp;&nbsp;&nbsp;<h4 class="small font-weight-bold">Remark:</h4>
+                      <h4 class="small font-weight-bold text-primary">&nbsp;*</h4>
+                    </div>
+                    <div class="textarea" id="collapseExample">
+                      <textarea id="myTextArea" class="form-control" rows="3" style="height:auto;" [(value)]="remark"
+                        id="InputRemark"></textarea>
+                    </div>
+                  </div>
+                  <div class=" mb-4 text-right">
+                    <a class="btn btn-success btn-icon-split btn-sm">
+                      <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                      </span>
+                      <button type="submit" id="btnsave" class="btn btn-success btn-sm">Save</button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <app-templatefooter></app-templatefooter>
+  </div>
+</div>

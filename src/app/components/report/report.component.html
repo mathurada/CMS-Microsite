@@ -1,0 +1,180 @@
+<div id="wrapper">
+  <app-templatemenu></app-templatemenu>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <app-templateheader></app-templateheader>
+      <div class="container-fluid">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">SEO Report</h1>
+        </div>
+        <div class="mb-4">
+          <h4 class="small font-weight-bold">Page:</h4>
+          <div class="dropdown" style="text-align-last:center; text-align: center;">
+            <select class="btn btn-danger btn-user btn-block dropdown-toggle btn-sm" [(value)]="pageselect" (change)="selectpage($event.target.value)">
+              <option selected [value]="null">Select Page</option>
+              <option *ngFor="let lookupcmspagemaster of lookupcmspagemaster | async"
+                [value]="lookupcmspagemaster.code">
+                {{lookupcmspagemaster.code}}&#58;&#32;{{lookupcmspagemaster.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">SEO Report</h6>
+              </div>
+              <div class="card-body">
+                <div class="align-items-center">
+                  <div>
+                    <cite class="link">www.pilotthai.com › loans › personal-loan</cite>
+                  </div>
+                  <a href="">
+                    <h3 class="header">สินเชื่อบุคคล - PILOT THAI</h3>
+                  </a>
+                  <div>
+                    <span class="st">
+                      สร้างแผนในอนาคตของคุณให้เป็นจริง ยอดผ่อนชำระเท่ากันทุกเดือน. แบบลดต้นลดดอก. สินเชื่อบุคคล.
+                      สินเชื่อบุคคล. สินเชื่อบุคคล. สินเชื่อบุคคลเพอร์ซันนัลแคช w.
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">SEO Sources</h6>
+                <h4 class="medium font-weight-bold"><span class="float-right">80%</span></h4>
+              </div>
+              <div class="card-body">
+                <div class="chart-wrapper">
+                  <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+                    [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+                  </canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-12 col-lg-12">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Overview of The SEO Check</h6>
+              </div>
+              <div class="card-body">
+                <h4 class="small font-weight-bold">Meta information<span class="float-right">20%</span></h4>
+                <div class="progress mb-4">
+                  <div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">Page quality<span class="float-right">20%</span></h4>
+                <div class="progress mb-4">
+                  <div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">Page structure<span class="float-right">30%</span></h4>
+                <div class="progress mb-4">
+                  <div class="progress-bar" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">Link structure<span class="float-right">70%</span></h4>
+                <div class="progress mb-4">
+                  <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">Server<span class="float-right">70%</span></h4>
+                <div class="progress mb-4">
+                  <div class="progress-bar" role="progressbar" style="width: 70%; background-color: purple"
+                    aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">External factors<span class="float-right">90%</span></h4>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-xl-12 col-lg-12">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Task list of SEO IMprovements</h6>
+              </div>
+              <div class="card-body">
+                <div class="alert alert-danger" role="alert">
+                  <i class="fas fa-trash"></i>
+                  Add a H1 heading to this page.
+                </div>
+                <div class="alert alert-danger" role="alert">
+                  <i class="fas fa-trash"></i>
+                  This page has only wery few links. If it's welcome page consider removing it.
+                </div>
+                <div class="alert alert-danger" role="alert">
+                  <i class="fas fa-trash"></i>
+                  Improve the page response time.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Pie Chart -->
+        <div class="col-xl-4 col-lg-5">
+          <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+              <div class="dropdown no-arrow">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                  aria-labelledby="dropdownMenuLink">
+                  <div class="dropdown-1header">Dropdown Header:</div>
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+              <div class="chart-pie pt-4 pb-2">
+                <canvas id="myPieChart"></canvas>
+              </div>
+              <div class="mt-4 text-center small">
+                <span class="mr-2">
+                  <i class="fas fa-circle text-primary"></i> Direct
+                </span>
+                <span class="mr-2">
+                  <i class="fas fa-circle text-success"></i> Social
+                </span>
+                <span class="mr-2">
+                  <i class="fas fa-circle text-info"></i> Referral
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    <app-templatefooter></app-templatefooter>
+  </div>
+</div>

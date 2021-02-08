@@ -1,0 +1,215 @@
+<div id="wrapper">
+  <app-templatemenu></app-templatemenu>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div class="content">
+      <app-templateheader></app-templateheader>
+      <div id="content-Header" class="container-fluid">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Edit Meta Tags
+              <select class="badge badge-secondary float-right" [hidden]="show" [(value)]="changeid"
+                (change)="selectchangeid($event.target.value)">
+                <option selected [value]="null">Select ChangeID</option>
+                <option *ngFor="let lookupchangeid of lookupchangeid | async" [value]="lookupchangeid.changeID">
+                  {{lookupchangeid.changeID}}
+                </option>
+              </select>
+            </h6>
+          </div>
+          <div class="card-body">
+            <div class="mb-4">
+              <div id="alert">
+                <div class="alert alert-danger" role="alert" [hidden]="!savefail">Save fail</div>
+                <div class="alert alert-success" role="alert" [hidden]="!savesuccess">Save success</div>
+              </div>
+              <div id="validation">
+                <p class="text-danger" [hidden]="!requirepageselect">*Enter page</p>
+                <p class="text-danger" [hidden]="!requirechangeid">*Enter changeid</p>
+              </div>
+              <div id="validation-add">
+                <p class="text-danger" [hidden]="!requireparamid">*Enter paramid</p>
+                <p class="text-danger" [hidden]="!requireattribute1">*Enter Attribute1</p>
+                <p class="text-danger" [hidden]="!requirevalue1">*Enter Value1</p>
+              </div>
+            </div>
+            <div class="mb-4">
+              <h4 class="small font-weight-bold">Page:</h4>
+              <div class="dropdown" style="text-align-last:center; text-align: center;">
+                <select class="btn btn-danger btn-user btn-block dropdown-toggle btn-sm" [(value)]="pageselect"
+                  (change)="selectpage($event.target.value)">
+                  <option selected [value]="null">Select Page</option>
+                  <option *ngFor="let lookupcmspagemaster of lookupcmspagemaster | async"
+                    [value]="lookupcmspagemaster.code">
+                    {{lookupcmspagemaster.code}}&#58;&#32;{{lookupcmspagemaster.description}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <form class="form" role="form" autocomplete="off">
+              <div class="form-group row">
+                <div class="col-sm">
+                  <h4 class="small font-weight-bold">Paramid:</h4>
+                  <div class="dropdown" style="text-align-last:center; text-align: center;">
+                    <select class="btn btn-danger btn-user btn-block dropdown-toggle btn-sm" [(value)]="paramselect"
+                      (change)="selectparamid($event.target.value)">
+                      <option selected [value]="null">Select Parameter</option>
+                      <option *ngFor="let lookupcmsparamid of lookupcmsparamid | async"
+                        [value]="lookupcmsparamid.paramid">
+                        {{lookupcmsparamid.paramid}}
+                        &#58;&#32;{{lookupcmsparamid.text1}}
+                        &#58;&#32;{{lookupcmsparamid.default1}}
+                        &#58;&#32;{{lookupcmsparamid.text2}}
+                        &#58;&#32;{{lookupcmsparamid.default2}}
+                        &#58;&#32;{{lookupcmsparamid.text3}}
+                        &#58;&#32;{{lookupcmsparamid.default3}}
+                        &#58;&#32;{{lookupcmsparamid.text4}}
+                        &#58;&#32;{{lookupcmsparamid.default4}}
+                        &#58;&#32;{{lookupcmsparamid.text5}}
+                        &#58;&#32;{{lookupcmsparamid.default5}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm">
+                  <input type="search" class="form-control form-control-sm" placeholder="Enter Attribute1"
+                    aria-controls="dataTable" [(value)]="attribute1" (keyup)="onkeyaddfield1($event)">
+                </div>
+                <div class="col-sm">
+                  <input type="search" class="form-control form-control-sm" placeholder="Enter Value1"
+                    aria-controls="dataTable" [(value)]="value1" (keyup)="onkeyaddfield2($event)">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm">
+                  <input type="search" class="form-control form-control-sm" placeholder="Enter Attribute2"
+                    aria-controls="dataTable" [(value)]="attribute2" (keyup)="onkeyaddfield3($event)">
+                </div>
+                <div class="col-sm">
+                  <input type="search" class="form-control form-control-sm" placeholder="Enter Value2"
+                    aria-controls="dataTable" [(value)]="value2" (keyup)="onkeyaddfield4($event)">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm">
+                  <a class="btn btn-success btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-plus"></i>
+                    </span>
+                    <button id="btnsave" class="btn btn-success btn-sm" (click)="add()">Add</button>
+                  </a>
+                  <span>&nbsp;</span>
+                  <a class="btn btn-danger btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-remove-format"></i>
+                    </span>
+                    <button type="reset" value="" class="btn btn-danger btn-sm">Clear</button>
+                  </a>
+                </div>
+              </div>
+            </form>
+            <div class="table-responsive">
+              <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0"
+                [hidden]="showtable">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>pageId</th>
+                    <th>paramId</th>
+                    <th>Attribute1</th>
+                    <th>Value1</th>
+                    <th>Attribute2</th>
+                    <th>Value2</th>
+                    <th>Tools</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let cmsmetatag of cmsmetatag | async">
+                  <tr>
+                    <td>{{cmsmetatag.pageID}}</td>
+                    <td>{{cmsmetatag.paramID}}</td>
+                    <td>{{cmsmetatag.text1}}</td>
+                    <td>{{cmsmetatag.default1}}</td>
+                    <td>{{cmsmetatag.text2}}</td>
+                    <td>{{cmsmetatag.default2}}</td>
+                    <td>
+                      <button type="button" class="fas fa-pen-square" data-toggle="modal" data-target="#exampleModal"
+                        (click)="onkeyupdate(
+                            cmsmetatag.pageID, 
+                            cmsmetatag.paramID, 
+                            cmsmetatag.text1,
+                            cmsmetatag.default1,
+                            cmsmetatag.text2,
+                            cmsmetatag.default2
+                          )">
+                      </button>
+                      <!-- Modal -->
+                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Edit Meta Tag</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <form>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">page:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [(value)]="updpageselect" disabled>
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">changeid:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [(value)]="updchangeid" (keyup)=onkeyupdatefield1($event) disabled>
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">paramid:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [(value)]="updparamselect" (keyup)=onkeyupdatefield2($event) disabled>
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">attribute1:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [(value)]="updattribute1" (keyup)=onkeyupdatefield3($event)>
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">value1:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [(value)]="updvalue1" (keyup)=onkeyupdatefield4($event)>
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">attribute2:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [(value)]="updattribute2" (keyup)=onkeyupdatefield5($event)>
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">value2:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [(value)]="updvalue2" (keyup)=onkeyupdatefield6($event)>
+                                </div>
+                              </form>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-success btn-sm" (click)="update()"
+                                data-dismiss="modal" aria-label="Close">Update</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" class="fas fa-minus-square"
+                        (click)="delete(cmsmetatag.pageid, cmsmetatag.changeid, cmsmetatag.paramid)"></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-templatefooter></app-templatefooter>
+  </div>
+</div>

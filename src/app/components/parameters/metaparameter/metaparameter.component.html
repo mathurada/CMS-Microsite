@@ -1,0 +1,308 @@
+<div id="wrapper">
+  <app-templatemenu></app-templatemenu>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div class="content">
+      <app-templateheader></app-templateheader>
+      <div class="container-fluid">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Edit Meta Parameter</h6>
+          </div>
+          <div class="card-body">
+            <div class="mb-4">
+              <div id="alert">
+                <div class="alert alert-danger" role="alert" [hidden]="!savefail">Save fail</div>
+                <div class="alert alert-success" role="alert" [hidden]="!savesuccess">Save success</div>
+              </div>
+              <div id="validation">
+                <p class="text-danger" [hidden]="!requireattribute1">*Enter Attribute1</p>
+                <p class="text-danger" [hidden]="!requirevalue1">*Enter value1</p>
+                <p class="text-danger" [hidden]="!requireattribute2">*Enter Attribute2</p>
+                <p class="text-danger" [hidden]="!requirevalue2">*Enter value2</p>
+              </div>
+            </div>
+            <form class="form" role="form" autocomplete="off">
+              <div class="form-group row">
+                <div class="col-sm">
+                  <input class="form-control form-control-sm" placeholder="Enter Attribute1" aria-controls="dataTable"
+                    [(value)]="attribute1" (keyup)="onkeyaddfield1($event)">
+                </div>
+                <div class="col-sm">
+                  <input class="form-control form-control-sm" placeholder="Enter Value1" aria-controls="dataTable"
+                    [(value)]="value1" (keyup)="onkeyaddfield2($event)">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm">
+                  <input class="form-control form-control-sm" placeholder="Enter Attribute2" aria-controls="dataTable"
+                    [(value)]="attribute2" (keyup)="onkeyaddfield3($event)">
+                </div>
+                <div class="col-sm">
+                  <input class="form-control form-control-sm" placeholder="Enter Value2" aria-controls="dataTable"
+                    [(value)]="value2" (keyup)="onkeyaddfield4($event)">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm">
+                  <a class="btn btn-success btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-plus"></i>
+                    </span>
+                    <button type="submit" id="btnsave" class="btn btn-success btn-sm" (click)="add()">Add</button>
+                  </a>
+                  <span>&nbsp;</span>
+                  <a class="btn btn-danger btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-remove-format"></i>
+                    </span>
+                    <button type="reset" value="" class="btn btn-danger btn-sm">Clear</button>
+                  </a>
+                </div>
+              </div>
+            </form>
+            <div class="table-responsive">
+              <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                  <div class="col-sm-12 col-md-6">
+                    <div class="dataTables_length" id="dataTable_length"><label>Show <select name="dataTable_length"
+                          aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                          <option value="10">10</option>
+                          <option value="25">25</option>
+                          <option value="50">50</option>
+                          <option value="100">100</option>
+                        </select> entries</label></div>
+                  </div>
+                  <div class="col-sm-12 col-md-6">
+                    <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search"
+                          class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <!-- <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0"
+                      role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                      <thead>
+                        <tr role="row">
+                          <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                            aria-sort="ascending" aria-label="Name: activate to sort column descending"
+                            style="width: 59px;">Name</th>
+                          <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                            aria-label="Position: activate to sort column ascending" style="width: 63px;">Position</th>
+                          <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                            aria-label="Office: activate to sort column ascending" style="width: 51px;">Office</th>
+                          <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                            aria-label="Age: activate to sort column ascending" style="width: 31px;">Age</th>
+                          <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                            aria-label="Start date: activate to sort column ascending" style="width: 69px;">Start date
+                          </th>
+                          <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                            aria-label="Salary: activate to sort column ascending" style="width: 68px;">Salary</th>
+                        </tr>
+                      </thead>
+                      <tfoot>
+                        <tr>
+                          <th rowspan="1" colspan="1">Name</th>
+                          <th rowspan="1" colspan="1">Position</th>
+                          <th rowspan="1" colspan="1">Office</th>
+                          <th rowspan="1" colspan="1">Age</th>
+                          <th rowspan="1" colspan="1">Start date</th>
+                          <th rowspan="1" colspan="1">Salary</th>
+                        </tr>
+                      </tfoot>
+                      <tbody>
+                        <tr role="row" class="odd">
+                          <td class="sorting_1">Airi Satou</td>
+                          <td>Accountant</td>
+                          <td>Tokyo</td>
+                          <td>33</td>
+                          <td>2008/11/28</td>
+                          <td>$162,700</td>
+                        </tr>
+                        <tr role="row" class="even">
+                          <td class="sorting_1">Angelica Ramos</td>
+                          <td>Chief Executive Officer (CEO)</td>
+                          <td>London</td>
+                          <td>47</td>
+                          <td>2009/10/09</td>
+                          <td>$1,200,000</td>
+                        </tr>
+                        <tr role="row" class="odd">
+                          <td class="sorting_1">Ashton Cox</td>
+                          <td>Junior Technical Author</td>
+                          <td>San Francisco</td>
+                          <td>66</td>
+                          <td>2009/01/12</td>
+                          <td>$86,000</td>
+                        </tr>
+                        <tr role="row" class="even">
+                          <td class="sorting_1">Bradley Greer</td>
+                          <td>Software Engineer</td>
+                          <td>London</td>
+                          <td>41</td>
+                          <td>2012/10/13</td>
+                          <td>$132,000</td>
+                        </tr>
+                        <tr role="row" class="odd">
+                          <td class="sorting_1">Brenden Wagner</td>
+                          <td>Software Engineer</td>
+                          <td>San Francisco</td>
+                          <td>28</td>
+                          <td>2011/06/07</td>
+                          <td>$206,850</td>
+                        </tr>
+                        <tr role="row" class="even">
+                          <td class="sorting_1">Brielle Williamson</td>
+                          <td>Integration Specialist</td>
+                          <td>New York</td>
+                          <td>61</td>
+                          <td>2012/12/02</td>
+                          <td>$372,000</td>
+                        </tr>
+                        <tr role="row" class="odd">
+                          <td class="sorting_1">Bruno Nash</td>
+                          <td>Software Engineer</td>
+                          <td>London</td>
+                          <td>38</td>
+                          <td>2011/05/03</td>
+                          <td>$163,500</td>
+                        </tr>
+                        <tr role="row" class="even">
+                          <td class="sorting_1">Caesar Vance</td>
+                          <td>Pre-Sales Support</td>
+                          <td>New York</td>
+                          <td>21</td>
+                          <td>2011/12/12</td>
+                          <td>$106,450</td>
+                        </tr>
+                        <tr role="row" class="odd">
+                          <td class="sorting_1">Cara Stevens</td>
+                          <td>Sales Assistant</td>
+                          <td>New York</td>
+                          <td>46</td>
+                          <td>2011/12/06</td>
+                          <td>$145,600</td>
+                        </tr>
+                        <tr role="row" class="even">
+                          <td class="sorting_1">Cedric Kelly</td>
+                          <td>Senior Javascript Developer</td>
+                          <td>Edinburgh</td>
+                          <td>22</td>
+                          <td>2012/03/29</td>
+                          <td>$433,060</td>
+                        </tr>
+                      </tbody>
+                    </table> -->
+                    <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th>paramID</th>
+                          <th>Attribute1</th>
+                          <th>Value1</th>
+                          <th>Attribute2</th>
+                          <th>Value2</th>
+                          <th>Tools</th>
+                        </tr>
+                      </thead>
+                      <tbody *ngFor="let cmsmetaparam of cmsmetaparam | async">
+                        <tr>
+                          <td>{{cmsmetaparam.paramID}}</td>
+                          <td>{{cmsmetaparam.text1}}</td>
+                          <td>{{cmsmetaparam.default1}}</td>
+                          <td>{{cmsmetaparam.text2}}</td>
+                          <td>{{cmsmetaparam.default2}}</td>
+                          <td>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="fas fa-pen-square" data-toggle="modal" data-target="#exampleModal"
+                              (click)="onkeyupdate(cmsmetaparam.paramID, cmsmetaparam.text1, cmsmetaparam.default1, cmsmetaparam.text2, cmsmetaparam.default2)">
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                              aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit City</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form>
+                                      <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">paramid:</label>
+                                        <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                          [value]="updparamid" disabled>
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">attribute1:</label>
+                                        <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                          [value]="updattribute1" (keyup)="onkeyupdatefield1($event)">
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">value1:</label>
+                                        <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                          [value]="updvalue1" (keyup)="onkeyupdatefield2($event)">
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">attribute2:</label>
+                                        <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                          [value]="updattribute2" (keyup)="onkeyupdatefield3($event)">
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">value2:</label>
+                                        <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                          [value]="updvalue2" (keyup)="onkeyupdatefield4($event)">
+                                      </div>
+                                    </form>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success btn-sm" (click)="update()"
+                                      data-dismiss="modal" aria-label="Close">Update</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <button type="button" class="fas fa-minus-square" (click)="delete(cmsmetaparam.paramID)"></button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 10 of
+                      57 entries</div>
+                  </div>
+                  <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                      <ul class="pagination">
+                        <li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#"
+                            aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                        <li class="paginate_button page-item active"><a href="#" aria-controls="dataTable"
+                            data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                        <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2"
+                            tabindex="0" class="page-link">2</a></li>
+                        <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3"
+                            tabindex="0" class="page-link">3</a></li>
+                        <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4"
+                            tabindex="0" class="page-link">4</a></li>
+                        <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="5"
+                            tabindex="0" class="page-link">5</a></li>
+                        <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6"
+                            tabindex="0" class="page-link">6</a></li>
+                        <li class="paginate_button page-item next" id="dataTable_next"><a href="#"
+                            aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-templatefooter></app-templatefooter>
+  </div>
+</div>

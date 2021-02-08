@@ -1,0 +1,71 @@
+<ul class="navbar-nav bg-gradient-cimb sidebar sidebar-dark accordion" id="accordionSidebar" >
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <div class="sidebar-brand-icon ">
+      <!-- <img class="logo" src="../../assets/img/logo.png"  alt=""> -->
+      <img src="https://www.flaticon.com/svg/vstatic/svg/785/785116.svg?token=exp=1612789029~hmac=022fa831055fb695a71d5d041118cd42" alt="Fire" class="replaced-svg">FIRE
+    </div> 
+  </a>
+  <hr class="sidebar-divider my-0" [hidden]="showCatagoryHome">
+  <li class="nav-item">
+    <a class="nav-link " href="/#/home">
+      <i class="fas fa-fw fa-tachometer-alt"></i>
+      <span>Home</span>
+    </a>
+  </li>
+  <li class="nav-item" [hidden]="showCatagoryChangeRequest">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>Change Requests</span>
+    </a>
+    <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" [hidden]="showRequest" href="/#/request">Request</a>
+        <a class="collapse-item" [hidden]="showApprove" href="/#/approve">Approve</a>
+        <a class="collapse-item" [hidden]="showNewRequest" href="/#/newrequest">New Request</a>
+        <a class="collapse-item" [hidden]="showGeneratePage" href="/#/generatepage">Generate Page</a>
+      </div>
+    </div>
+  </li>
+  <li class="nav-item" [hidden]="showCatagoryEditor">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+      <i class="fas fa-fw fa-wrench"></i>
+      <span>Editors</span>
+    </a>
+    <div id="collapseTwo" class="collapse " aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" [hidden]="showEditContentPage" href="/#/content">Edit Content Page</a>
+        <a class="collapse-item" [hidden]="showEditPicture" href="/#/picture">Edit Picture</a>
+        <a class="collapse-item" [hidden]="showEditHeader" href="/#/header">Edit Header</a>
+        <a class="collapse-item" [hidden]="showEditFooter" href="/#/footer">Edit Footer</a>
+        <a class="collapse-item" [hidden]="showEditMenu" href="/#/menu">Edit Menu</a>
+        <a class="collapse-item" [hidden]="showEditLayoutPage" href="/#/layout">Edit Layout Page</a>
+        <a class="collapse-item" [hidden]="showEditMetaTag" href="/#/metatag">Edit Meta Tag</a>
+        <a class="collapse-item" [hidden]="showEditAdminContent" href="/#/admincontent">Edit Admin Content</a>
+        <a class="collapse-item" [hidden]="showEditSystemContent" href="/#/systemcontent">Edit System Content</a>
+      </div>
+    </div>
+  </li>
+  <li class="nav-item" [hidden]="showCatagoryParameter">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+      <i class="fas fa-fw fa-cog"></i>
+      <span>Parameters</span>
+    </a>
+    <div id="collapseThree" class="collapse " aria-labelledby="headingThree" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" [hidden]="showEditMetaParam" href="/#/metaparameter">Edit Meta Parameter</a>
+        <a class="collapse-item" [hidden]="showeditPrefix" href="/#/prefix">Edit Prefix</a>
+        <a class="collapse-item" [hidden]="showEditCity" href="/#/city">Edit City</a>
+        <a class="collapse-item" [hidden]="showEditOccupation" href="/#/occupation">Edit Occupation</a>
+        <a class="collapse-item" [hidden]="showManageUser" href="/#/manageuser">Manage User</a>
+        <a class="collapse-item" [hidden]="showManageRole" href="/#/managerole">Manage Role</a>
+        <a class="collapse-item" [hidden]="showManageMenuRole" href="/#/managemenurole">Manage Menu Role</a>
+      </div>
+    </div>
+  </li>
+  <li class="nav-item" [hidden]="showCatagoryReport">
+    <a class="nav-link " href="/#/report" >
+      <i class="fas fa-fw fa-table"></i>
+      <span>Report</span>
+    </a>
+  </li>
+</ul>

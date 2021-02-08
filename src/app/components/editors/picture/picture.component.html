@@ -1,0 +1,209 @@
+
+  <div id="wrapper">
+    <app-templatemenu></app-templatemenu>
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div class="content">
+        <app-templateheader></app-templateheader>
+        <div class="container-fluid">
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">
+                Edit Picture
+                <select class="badge badge-secondary float-right" [hidden]="show"[(value)]="changeid"
+                (change)="selectchangeid($event.target.value)">
+                  <option selected [ngValue]="">Select ChangeID</option>
+                  <option *ngFor="let lookupchangeid of lookupchangeid | async" [value]="lookupchangeid.changeID">
+                    {{lookupchangeid.changeID}}&#58;&#32;{{lookupchangeid.changeDESC}}
+                  </option>
+                </select>
+              </h6>
+            </div>
+            <div class="card-body">
+              <div class="mb-4">
+                <div id="alert">
+                  <div class="alert alert-danger" role="alert" [hidden]="!savefail">Save fail</div>
+                  <div class="alert alert-success" role="alert" [hidden]="!savesuccess">Save success</div>
+                </div>
+                <div id="validation">
+                  <p class="text-danger" [hidden]="!requirepage">*Please select page.</p>
+                  <p class="text-danger" [hidden]="!requirechangeid">*Please select changeid.</p>
+                </div>
+              </div>
+              <div class="mb-4 ">
+                <div class="dropdown">
+                    <div class="row">
+                        &nbsp;&nbsp;&nbsp;<h4 class="small font-weight-bold">Page:</h4>
+                        <h4 class="small font-weight-bold text-primary">&nbsp;*</h4>
+                    </div>
+                  <div class="dropdown" style="text-align-last:center; text-align: center;">
+                    <select class="btn btn-danger btn-user btn-block dropdown-toggle btn-sm" [(value)]="pageselect"
+                      (change)="onSelect($event.target.value)">
+                      <option selected [value]="null">Select Page</option>
+                      <option *ngFor="let lookupcmspagemaster of lookupcmspagemaster | async"
+                        [value]="lookupcmspagemaster.code">
+                        {{lookupcmspagemaster.code}}&#58;&#32;{{lookupcmspagemaster.description}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0"
+                  [hidden]="showtable">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>ID</th>
+                      <!-- <th>pageID</th> -->
+                      <th>File path</th>
+                      <th>File Name</th>
+                      <th>Group</th>
+                      <th>Type</th>
+                      <th>Picture</th>
+                      <th>Remark</th>
+                      <th>Ver</th>
+                      <th>Tools</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let cmspicture of cmspicture|async">
+                    <tr>
+                      <td>{{cmspicture.pictureID}}</td>
+                      <!-- <td>{{cmspicture.pageID}}</td> -->
+                      <td>{{cmspicture.filepath}}</td>
+                      <td>{{cmspicture.fileName}}</td>
+                      <td>{{cmspicture.pictureGroup}}</td>
+                      <td>{{cmspicture.fileType}}</td>
+                      <td>
+                        <img src="data:image/png;base64,{{cmspicture.picture}}" alt="" style="width:48px;height:auto;" data-toggle="modal" data-target="#imageModal"
+                        (click)="onshow(cmspicture.picture)">
+                        <!-- <img src="{{cmspicture.picture}}" alt="" style="width:48px;height:48px;"> -->
+                        
+                      </td>
+                      <td>{{cmspicture.pictureRemark}}</td>
+                      <td [style.color]="cmspicture.verType=='Master'? 'green' : 'blue'">{{cmspicture.verType}}</td>
+                      <td>
+                        <button type="button" class="fas fa-pen-square" data-toggle="modal" data-target="#exampleModal"
+                          (click)="onkeyupdate(
+                          cmspicture.pictureID, 
+                          cmspicture.pageID, 
+                          cmspicture.filepath,
+                          cmspicture.fileName,
+                          cmspicture.fileType,
+                          cmspicture.picture,
+                          cmspicture.pictureRemark,
+                          cmspicture.project,
+                          cmspicture.verType
+                        )">
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                          aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Picture</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                  <div class="row">
+                                <div class="form-group col-md-2">
+                                  <label for="recipient-name" class="col-form-label">pictureID:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updpictureID" disabled>
+                                </div>
+                                <div class="form-group col-md-2">
+                                  <label for="recipient-name" class="col-form-label">pageID:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="pageselect" disabled>
+                                </div>
+                                <div class="form-group col-md-2">
+                                  <label for="recipient-name" class="col-form-label">fileType:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updfileType" disabled>
+                                </div>
+                                <div class=" form-group col-md-6">
+                                  <label for="recipient-name" class="col-form-label">pictureRemark:</label>
+                                  <input type="text" class="form-control form-control-sm" a5ria-controls="dataTable"
+                                    [value]="updpictureRemark" disabled>
+                                </div>
+
+                                </div>
+                                <div class="row">
+                                <div class="form-group col-md-4">
+                                  <label for="recipient-name" class="col-form-label">fileName:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updfileName" disabled>
+                                </div>
+                                <div class="form-group col-md-8">
+                                  <label for="recipient-name" class="col-form-label">filepath:</label>
+                                  <input type="text" class="form-control form-control-sm" aria-controls="dataTable"
+                                    [value]="updfilepath" disabled>
+                                </div>
+                              </div>
+                              
+                                <!-- <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">picture:</label>
+                                <input type="file" class="form-control form-control-sm" aria-controls="dataTable"
+                                  [value]="updpicture" >
+                              </div> -->
+                                <div class="from-group">
+                                  <label for="recipient-name" class="col-form-label">picture:</label>
+                                  <div class="form-group">
+                                    <input type="file" name="image" (change)="fileProgress($event)" />
+                                  </div>
+                                  <div *ngIf="fileUploadProgress">
+                                    Upload progress: {{ fileUploadProgress }}
+                                  </div>
+                                  <div class="image-preview mb-3" *ngIf="previewUrl">
+                                    <img [src]="previewUrl" height="48" />
+                                  </div>
+                                </div>
+                                <label class="col-form-label"><font color="red">{{filevalidate}}</font></label>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="submit" class="btn btn-success btn-sm" (click)="update()"
+                                  data-dismiss="modal" aria-label="Close">Save Picture</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="modal fade" id="imageModal" tabindex="-1" role="dialog"
+                          aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Preview Picture</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                
+                                <div class="from-group">
+                                  <label for="recipient-name" class="col-form-label">picture:</label>
+                                  <div class="form-group">
+                                      <img id="image01" style="width:400px;height:auto;" [src]="showpicture" />
+                                  </div>
+                                </div>
+                              </div>
+                        
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-templatefooter></app-templatefooter>
+    </div>
+  </div>

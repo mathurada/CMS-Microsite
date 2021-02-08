@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand navbar-dark bg-white topbar shadow mb-4 static-top" >
+  <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+    <div class="input-group">
+      <h5 class="h5 mb-0 text-gray-800">Pilot-Content Mangement System (Pilot-CMS)</h5>
+    </div>
+  </form>
+  <ul class="navbar-nav ml-auto ml-md-0">
+    <div class="topbar-divider d-none d-sm-block"></div>
+    <li class="nav-item dropdown no-arrow">
+      <a class="nav-link dropdown-toggle text-gray-800" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img class="img-profile rounded-circle" src="{{pathuserlogo}}">
+        <label class="ml-2 d-none d-lg-inline text-gray-600 small">{{cmsuser}}<br/>{{cmsrolecode}}&nbsp;<font color="green">{{cmsteam}}</font></label>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+        <button class="dropdown-item" (click)="onLogout()" >Logout</button>
+      </div>
+    </li>
+  </ul>
+</nav> 
