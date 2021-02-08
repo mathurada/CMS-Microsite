@@ -11,10 +11,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-Skip authorize login by http://localhost:4200/#/home
+
 - First Page: Login
 - All of page: Check authorize login
-- For demostartion: Close check authorize login for dislay working
+- For demostartion: Skip authorize login by `http://localhost:4200/#/home`. (close script for the cheking)
 
 ## Code scaffolding
 
